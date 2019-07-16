@@ -30,7 +30,6 @@ public class HelloResource {
     public ResponseEntity getAllEmployees(){
         Employee employee=new Employee("aaa",11,18,"a1");
         result.add(employee);
-//        result.toString();
         return ResponseEntity.ok().body(result);
     }
     @PostMapping()
@@ -44,7 +43,7 @@ public class HelloResource {
         changeEmployee.get(0).setName(employee.getName());
         changeEmployee.get(0).setAge(employee.getAge());
         changeEmployee.get(0).setGender(employee.getGender());
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(changeEmployee);
 
     }
     @DeleteMapping("/{id}")
@@ -52,9 +51,10 @@ public class HelloResource {
         for(Employee employee:result){
             if(employee.getId()==id){
                 result.remove(employee);
+                return ResponseEntity.ok().build();
             }
         }
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.notFound().build();
     }
 
 
